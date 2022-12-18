@@ -30,6 +30,17 @@
                         "Succeeded"
                     ]
                 }
+            },
+            "HTTP": {
+                "type": "Http",
+                "inputs": {
+                    "method": "GET",
+                    "uri": "@triggerBody()?['body']?['callBackUri']",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    }
+                },
+                "runAfter": {}
             }
         },
         "triggers": {
