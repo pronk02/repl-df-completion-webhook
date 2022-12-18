@@ -1,0 +1,72 @@
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,azurefunctions,azurite
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,azurefunctions,azurite
+
+### AzureFunctions ###
+# Azure Functions localsettings file
+local.settings.json
+
+### Azurite ###
+# Azurite queue
+__queuestorage__
+__azurite_db_queue__.json
+__azurite_db_queue_extent__.json
+
+# Azurite blob
+__blobstorage__
+__azurite_db_blob__.json
+__azurite_db_blob_extent__.json
+
+# Azurite table
+__azurite_db_table__.json
+__azurite_db_table_extent__.json
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,azurefunctions,azurite
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+

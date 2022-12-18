@@ -1,0 +1,282 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Execute_JavaScript_Code": {
+                "type": "JavaScriptCode",
+                "inputs": {
+                    "code": "return JSON.stringify(workflowContext.trigger.outputs.body, null, 2)"
+                },
+                "runAfter": {}
+            },
+            "Send_Email": {
+                "type": "ServiceProvider",
+                "inputs": {
+                    "parameters": {
+                        "from": "jeff@jeffmcdonald.net",
+                        "to": "jmcdonald@hmsmarketingservices.com",
+                        "subject": "Logic Apps Webhook - Netsuite Replication Complete v2",
+                        "body": "@outputs('Execute_JavaScript_Code')",
+                        "importance": "Normal"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "Smtp",
+                        "operationId": "sendEmail",
+                        "serviceProviderId": "/serviceProviders/Smtp"
+                    }
+                },
+                "runAfter": {
+                    "Execute_JavaScript_Code": [
+                        "Succeeded"
+                    ]
+                }
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "properties": {
+                            "body": {
+                                "properties": {
+                                    "billingReference": {
+                                        "properties": {
+                                            "activityType": {
+                                                "type": "string"
+                                            },
+                                            "billableDuration": {
+                                                "items": {
+                                                    "properties": {
+                                                        "duration": {
+                                                            "type": "number"
+                                                        },
+                                                        "meterType": {
+                                                            "type": "string"
+                                                        },
+                                                        "unit": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "meterType",
+                                                        "duration",
+                                                        "unit"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "callBackUri": {
+                                        "type": "string"
+                                    },
+                                    "copyDuration": {
+                                        "type": "integer"
+                                    },
+                                    "dataConsistencyVerification": {
+                                        "properties": {
+                                            "VerificationResult": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "dataRead": {
+                                        "type": "integer"
+                                    },
+                                    "dataWritten": {
+                                        "type": "integer"
+                                    },
+                                    "durationInQueue": {
+                                        "properties": {
+                                            "integrationRuntimeQueue": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "effectiveIntegrationRuntime": {
+                                        "type": "string"
+                                    },
+                                    "errors": {
+                                        "type": "array"
+                                    },
+                                    "executionDetails": {
+                                        "items": {
+                                            "properties": {
+                                                "detailedDurations": {
+                                                    "properties": {
+                                                        "queuingDuration": {
+                                                            "type": "integer"
+                                                        },
+                                                        "timeToFirstByte": {
+                                                            "type": "integer"
+                                                        },
+                                                        "transferDuration": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "duration": {
+                                                    "type": "integer"
+                                                },
+                                                "profile": {
+                                                    "properties": {
+                                                        "queue": {
+                                                            "properties": {
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "status": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "transfer": {
+                                                            "properties": {
+                                                                "details": {
+                                                                    "properties": {
+                                                                        "readingFromSource": {
+                                                                            "properties": {
+                                                                                "timeToFirstByte": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "type": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "workingDuration": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "writingToSink": {
+                                                                            "properties": {
+                                                                                "type": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "workingDuration": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "duration": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "status": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "sink": {
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "source": {
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "start": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "usedDataIntegrationUnits": {
+                                                    "type": "integer"
+                                                },
+                                                "usedParallelCopies": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "source",
+                                                "sink",
+                                                "status",
+                                                "start",
+                                                "duration",
+                                                "usedDataIntegrationUnits",
+                                                "usedParallelCopies",
+                                                "profile",
+                                                "detailedDurations"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "rowsCopied": {
+                                        "type": "integer"
+                                    },
+                                    "rowsRead": {
+                                        "type": "integer"
+                                    },
+                                    "sinkPeakConnections": {
+                                        "type": "integer"
+                                    },
+                                    "sourcePeakConnections": {
+                                        "type": "integer"
+                                    },
+                                    "throughput": {
+                                        "type": "number"
+                                    },
+                                    "usedDataIntegrationUnits": {
+                                        "type": "integer"
+                                    },
+                                    "usedParallelCopies": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "headers": {
+                                "properties": {
+                                    "Connection": {
+                                        "type": "string"
+                                    },
+                                    "Content-Length": {
+                                        "type": "string"
+                                    },
+                                    "Content-Type": {
+                                        "type": "string"
+                                    },
+                                    "Expect": {
+                                        "type": "string"
+                                    },
+                                    "Host": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0"
+    },
+    "kind": "Stateful"
+}
